@@ -20,24 +20,20 @@ import {
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+
 import LoginScreen from './App/Containers/login';
 import RegisterScreen from './App/Containers/register';
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import HomeScreen from './App/Containers/HomeScreen';
 import EncryptedStorage from 'react-native-encrypted-storage'
-import { useMemo } from 'react';
+
 import { AuthContext } from './App/Context/AuthContext';
 import axios from 'axios'
 import SplashScreen from './App/Containers/SplashScreen';
 import SearchSession from './App/Containers/SearchSession';
+import SessionScreen from './App/Containers/SessionScreen';
+import { IndexProvider } from './App/Context/QuizContext';
 
 const Stack = createStackNavigator();
 
@@ -141,16 +137,19 @@ const App: () => React$Node = () => {
 
     <NavigationContainer>
 
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       {state.userToken == null ? (
         <>
         <Stack.Screen name="Register" component={RegisterScreen} />
-            <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         </>
       ):(
         <>
-      <Stack.Screen name="Home" component={HomeScreen}/>
-      <Stack.Screen name="SearchSession" component={SearchSession}/>
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="SearchSession" component={SearchSession} />
+        <Stack.Screen name="SessionScreen" component={SessionScreen}/>  
+      
+      
         </>
       )}
         
